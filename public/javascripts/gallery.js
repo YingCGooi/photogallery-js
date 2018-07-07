@@ -88,9 +88,8 @@ $(function() {
 		},
 
 		updateSlide() {
-			$('#slides figure').fadeOut()
-												 .filter(`[data-id=${this.photoId}]`)
-												 .fadeIn();
+			$('#slides figure').fadeOut();
+			$(`#slides figure[data-id=${this.photoId}]`).fadeIn();
 		},
 
 		updatePage() {
@@ -126,8 +125,9 @@ $(function() {
 			event.preventDefault();
 			const form = event.target;
 			form.photo_id.value = this.photoId;
+			const data = $(form).serialize();
 
-			$.post(NEW_COMMENT_PATH, $(form).serialize(), this.appendComment);
+			$.post(NEW_COMMENT_PATH, data, this.appendComment);
 			form.reset();
 		},
 	}
